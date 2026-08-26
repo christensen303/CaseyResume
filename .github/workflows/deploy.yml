@@ -22,21 +22,16 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-      - run: bun install --frozen-lockfile
+      - run: bun install
       - name: Build static site
         env:
-          GITHUB_PAGES: "true"
           # Project sites (username.github.io/<repo>) need the repo name as base.
-          # For a user/org site (username.github.io) change this to "/".
+          # For a user/org site (username.github.io) set this to "/".
           BASE_PATH: /${{ github.event.repository.name }}/
-        run: bun run build
-      - name: SPA fallback + disable Jekyll
-        run: |
-          cp .output/public/index.html .output/public/404.html
-          touch .output/public/.nojekyll
+        run: bun run build:pages
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .output/public
+          path: dist/client
 
   deploy:
     needs: build
