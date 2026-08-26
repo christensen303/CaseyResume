@@ -19,9 +19,6 @@ export default defineConfig({
         vite: { base: basePath },
         tanstackStart: {
           server: { entry: "server" },
-          spa: { enabled: true },
-          prerender: { enabled: true, crawlLinks: true },
-          pages: [{ path: "/", prerender: { enabled: true } }],
         },
       }
     : {
