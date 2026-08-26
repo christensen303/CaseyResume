@@ -15,7 +15,7 @@ export default defineConfig({
   ...(isGithubPages
     ? {
         // Static export: no server runtime, everything prerendered to .output/public
-        nitro: { preset: "static" as const },
+        nitro: false as const,
         vite: { base: basePath },
         tanstackStart: {
           server: { entry: "server" },
